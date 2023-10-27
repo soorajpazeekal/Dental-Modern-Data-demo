@@ -12,6 +12,7 @@ __pycache__/
 !/log/.keep
 !/tmp/.keep
 *.ini
+test.py
 
 .env
 # Jupyter Notebook
