@@ -12,4 +12,4 @@ while True:
     run_external_script()
     count += 1
     log.info(f"{count} Batch script executed successfully")
-    time.sleep(2)
+    time.sleep(10)
