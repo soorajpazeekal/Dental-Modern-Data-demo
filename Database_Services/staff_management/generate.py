@@ -8,7 +8,7 @@ fake = Faker()
 
 def staff_information(conn):
     cursor = conn.cursor()
-    staff_id = random.randint(10000, 99999)
+    staff_id = random.randint(1000, 99999)
     full_name = random.choice(('Dr Saif Downs', 'Dr Lydia Fry', 'Dr Inaaya Keller', 'Dr Caleb Merrill',
                                   'Dr Oakley Brock', 'Dr Alexandra Woodward', 'Dr Leonardo Fisher',
                                   'Dr Louise Santana', 'Dr Evan Frank', 'Dr Helen Smith', 'Dr John Doe'))

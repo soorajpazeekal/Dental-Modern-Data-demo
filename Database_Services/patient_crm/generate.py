@@ -8,7 +8,7 @@ fake = Faker()
 
 def add_pi_informations(conn):
     cursor = conn.cursor()
-    patient_id = random.randint(10000, 99999)
+    patient_id = random.randint(1000, 99999)
     first_name = fake.first_name()
     last_name = fake.last_name()
     date_of_birth = fake.date_of_birth(minimum_age=10, maximum_age=80)

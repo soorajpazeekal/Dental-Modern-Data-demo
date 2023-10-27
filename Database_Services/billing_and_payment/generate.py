@@ -10,7 +10,7 @@ def tr_invoice(conn):
     fake = Faker()
     cursor = conn.cursor()
     invoice_id = uuid.uuid4() 
-    patient_id = random.randint(10000, 99999)
+    patient_id = random.randint(1000, 99999)
     invoice_date = fake.date_time_between(start_date='-30d', end_date='now')
     due_date = invoice_date + timedelta(days=30)
     total_amount = round(random.uniform(100, 5000), 2)
