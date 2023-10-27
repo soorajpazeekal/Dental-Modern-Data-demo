@@ -24,89 +24,30 @@ sfOptions = {
   "sfWarehouse" : config['sfOptions']['sfWarehouse']
 }
 
-def read_cluster_04(spark):
-    jdbc_url = config['cluster_04']['jdbc_url']
-    connection_properties = {
-    "user": config['global']['username'],
-    "password": config['global']['password'],
-    "driver": "com.mysql.cj.jdbc.Driver"
-    }   
-    tables = config['cluster_04']['tables']
-    for item in tables.split(','):
-        try:
-            df = spark.read.jdbc(jdbc_url, table=item, properties=connection_properties)
-            df.write.format("net.snowflake.spark.snowflake") \
-                .options(**sfOptions) \
-                .option("dbtable", item) \
-                .mode("overwrite").save()
-        except Exception as e:
-            log.error(e)
-    log.info("Database 4 operations completed")
-    return 'ok'
-
-def read_cluster_03(spark):
-    jdbc_url = config['cluster_03']['jdbc_url']
-    connection_properties = {
-    "user": config['global']['username'],
-    "password": config['global']['password'],
-    "driver": "com.mysql.cj.jdbc.Driver"
-    }   
-    tables = config['cluster_03']['tables']
-    for item in tables.split(','):
-        try:
-            df = spark.read.jdbc(jdbc_url, table=item, properties=connection_properties)
-            df.write.format("net.snowflake.spark.snowflake") \
-                .options(**sfOptions) \
-                .option("dbtable", item) \
-                .mode("overwrite").save()
-        except Exception as e:
-            log.error(e)
-    log.info("Database 3 operations completed")
-    return 'ok'
-
-
-def read_cluster_02(spark):
-    jdbc_url = config['cluster_02']['jdbc_url']
-    connection_properties = {
-    "user": config['global']['username'],
-    "password": config['global']['password'],
-    "driver": "com.mysql.cj.jdbc.Driver"
-    }   
-    tables = config['cluster_02']['tables']
-    for item in tables.split(','):
-        try:
-            df = spark.read.jdbc(jdbc_url, table=item, properties=connection_properties)
-            df.write.format("net.snowflake.spark.snowflake") \
-                .options(**sfOptions) \
-                .option("dbtable", item) \
-                .mode("overwrite").save()
-        except Exception as e:
-            log.error(e)
-    log.info("Database 2 operations completed")
-    return 'ok'
-
-def read_cluster_01(spark):
-    jdbc_url = config['cluster_01']['jdbc_url']
-    connection_properties = {
-    "user": config['global']['username'],
-    "password": config['global']['password'],
-    "driver": "com.mysql.cj.jdbc.Driver"
-    }   
-    tables = config['cluster_01']['tables']
-    for item in tables.split(','):
-        try:
-            df = spark.read.jdbc(jdbc_url, table=item, properties=connection_properties)
-            df.write.format("net.snowflake.spark.snowflake") \
-                .options(**sfOptions) \
-                .option("dbtable", item) \
-                .mode("overwrite").save()
-        except Exception as e:
-            log.error(e)
-    log.info("Database 1 operations completed")
+def read_cluster_01(spark, cluster_id):
+    for item in cluster_id:
+        jdbc_url = config[item]['jdbc_url']
+        connection_properties = {
+        "user": config['global']['username'],
+        "password": config['global']['password'],
+        "driver": "com.mysql.cj.jdbc.Driver"
+        }   
+        tables = config[item]['tables']
+        for item in tables.split(','):
+            try:
+                df = spark.read.jdbc(jdbc_url, table=item, properties=connection_properties)
+                df.write.format("net.snowflake.spark.snowflake") \
+                    .options(**sfOptions) \
+                    .option("dbtable", item) \
+                    .mode("overwrite").save()
+            except Exception as e:
+                log.error(e)
+        log.info(f"Database {item} operations completed")
     return 'ok'
 
 
 
 
 if __name__ == "__main__":
-    read_cluster_02(spark)
+    read_cluster_01(spark, cluster_id=['cluster_01', 'cluster_02', 'cluster_03', 'cluster_04'])
+    spark.stop()
