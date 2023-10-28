@@ -13,7 +13,6 @@ jobs:
         with:
           python-version: '3.10'
       - name: Set working directory
-        run: cd elt_jobs
         working-directory: ./elt_jobs
       - name: Install dependencies
         run: pip install -r requirements.txt
