@@ -3,7 +3,7 @@ import logging as log
 import configparser
 
 log.basicConfig(level=log.INFO)
-config = configparser.ConfigParser(); config.read('elt_jobs/.ini') #Change to .ini if running local
+config = configparser.ConfigParser(); config.read('.ini')
 
 def clean_mysql(cluster_id):
     """

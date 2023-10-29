@@ -7,12 +7,12 @@ from pyspark.sql import SparkSession
 
 spark = SparkSession.builder \
     .appName("mysql_elt_job") \
-    .config("spark.jars", "./elt_jobs/jars/mysql-connector-j-8.2.0.jar") \
+    .config("spark.jars", "./jars/mysql-connector-j-8.2.0.jar") \
     .config("spark.jars.packages", "net.snowflake:snowflake-jdbc:3.13.22") \
     .config("spark.jars.packages", "net.snowflake:spark-snowflake_2.12:2.11.0-spark_3.3").getOrCreate()
 
 log.basicConfig(level=log.INFO)
-config = configparser.ConfigParser(); config.read('elt_jobs/.ini') #Change to .ini if running local
+config = configparser.ConfigParser(); config.read('.ini')
 
 '''Snowflake connection options'''
 sfOptions = {
