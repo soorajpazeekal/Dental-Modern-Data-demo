@@ -7,6 +7,7 @@ env:
   
 jobs:
   Run_Mysql_Snowflake:
+    name: Reads from the MySQL database and writes to the Snowflake
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -18,12 +19,31 @@ jobs:
       - name: Install java
         run: sudo apt update && sudo apt-get install openjdk-8-jdk-headless -qq
       - name: Install dependencies
-        run: pip install -r elt_jobs/requirements.txt
+        run: pip install findspark==2.0.1 && pip install pyspark==3.3.2
       - name: Prepare config
         run: openssl enc -d -aes-256-cbc -in elt_jobs/config.enc -out elt_jobs/.ini -pbkdf2 -k $PUBLIC_KEY
       - name: Check files are created successfully
         run: cd elt_jobs &&  ls -a
       - name: Main elt job
-        run: python elt_jobs/main_elt.py
+        run: cd elt_jobs && python main_elt.py
+
+
+  Clean_Mysql:
+    needs: Run_Mysql_Snowflake
+    name: Cleaning Mysql
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install mysql-connector-python==8.2.0
+      - name: Prepare config
+        run: openssl enc -d -aes-256-cbc -in elt_jobs/config.enc -out elt_jobs/.ini -pbkdf2 -k $PUBLIC_KEY
+      - name: Check files are created successfully
+        run: cd elt_jobs &&  ls -a
       - name: Clean Mysql stage
-        run: python elt_jobs/clean_database.py
+        run: cd elt_jobs && python clean_database.py
