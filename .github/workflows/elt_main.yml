@@ -49,7 +49,7 @@ jobs:
         run: cd elt_jobs && python clean_database.py
 
   Data_Quality_Test:
-    needs: [Run_Mysql_Snowflake, Run_Mysql_Snowflake]
+    needs: [Run_Mysql_Snowflake, Clean_Mysql]
     name: Testing Data Quality
     runs-on: ubuntu-latest
     steps:
