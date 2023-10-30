@@ -1,3 +1,4 @@
 findspark==2.0.1
 mysql-connector-python==8.2.0
 pyspark==3.3.2
+great-expectations==0.17.23

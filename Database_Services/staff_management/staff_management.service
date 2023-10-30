@@ -1,0 +1,12 @@
+[Unit]
+Description=My Python Background Service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/Dental-Modern-Data-demo/Database_Services/staff_management
+ExecStart=/usr/bin/python /home/ubuntu/Dental-Modern-Data-demo/Database_Services/staff_management/bg_worker.py
+Restart=always
+User=ubuntu
+
+[Install]
+WantedBy=multi-user.target
