@@ -76,7 +76,7 @@ def check_payment_column_for_kpi(table_names):
     return 'All tests passed'
 
 if __name__ == "__main__":
-    print(check_column_not_null(table_names=['pi_informations','medical_history',
+    check_column_not_null(table_names=['pi_informations','medical_history',
                                              'dental_records','insurance_information','invoices',
-                                             'payment_records']))
-    print(check_payment_column_for_kpi(table_names=['invoices','payment_records']))
+                                             'payment_records'])
+    check_payment_column_for_kpi(table_names=['invoices','payment_records'])

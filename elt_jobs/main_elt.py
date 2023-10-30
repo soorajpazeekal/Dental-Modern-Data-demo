@@ -57,5 +57,5 @@ def read_cluster_and_write_sf(spark, cluster_id):
 
 
 if __name__ == "__main__":
-    read_cluster_and_write_sf(spark, cluster_id=['cluster_01'])
+    read_cluster_and_write_sf(spark, cluster_id=['cluster_01', 'cluster_02', 'cluster_03', 'cluster_04'])
     spark.stop()

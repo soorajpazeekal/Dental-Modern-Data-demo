@@ -57,4 +57,4 @@ def clean_mysql(cluster_id):
     return 'ok'
 
 if __name__ == '__main__':
-    clean_mysql(cluster_id=['cluster_01'])
+    clean_mysql(cluster_id=['cluster_01', 'cluster_02', 'cluster_03', 'cluster_04'])

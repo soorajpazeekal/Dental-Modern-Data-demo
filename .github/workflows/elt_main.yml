@@ -47,3 +47,25 @@ jobs:
         run: cd elt_jobs &&  ls -a
       - name: Clean Mysql stage
         run: cd elt_jobs && python clean_database.py
+
+  Data_Quality_Test:
+    needs: [Run_Mysql_Snowflake, Run_Mysql_Snowflake]
+    name: Testing Data Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install java
+        run: sudo apt update && sudo apt-get install openjdk-8-jdk-headless -qq
+      - name: Install dependencies
+        run: pip install findspark==2.0.1 && pip install pyspark==3.3.2 && pip install great-expectations==0.17.23
+      - name: Prepare config
+        run: openssl enc -d -aes-256-cbc -in elt_jobs/config.enc -out elt_jobs/.ini -pbkdf2 -k $PUBLIC_KEY
+      - name: Start Data Quality Test
+        run: python expectations/run_test.py
+
+
