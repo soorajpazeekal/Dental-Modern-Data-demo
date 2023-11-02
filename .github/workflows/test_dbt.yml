@@ -21,4 +21,4 @@ jobs:
       - name: Install dependencies
         run: pip install dbt-snowflake==1.6.4
       - name: Run dbt
-        run: dbt run --profiles-dir 
+        run: dbt run --profiles-dir .
