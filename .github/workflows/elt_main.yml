@@ -7,7 +7,7 @@ env:
   
 jobs:
   Run_Mysql_Snowflake:
-    name: Reads from the MySQL database and writes to the Snowflake
+    name: Reads from MySQL database and writes to Snowflake
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

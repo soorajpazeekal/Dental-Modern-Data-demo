@@ -1,0 +1,12 @@
+sf_workflow:
+  outputs:
+    dev:
+      account: "{{ env_var('DB_HOST') }}"
+      database: "{{ env_var('DB_NAME') }}"
+      password: "{{ env_var('DB_PASS') }}"
+      schema: RAW_SILVER
+      threads: 10
+      type: snowflake
+      user: "{{ env_var('DB_USER') }}"
+      warehouse: COMPUTE_WH
+  target: dev
