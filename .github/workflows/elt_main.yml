@@ -1,6 +1,8 @@
 name: Deploy_ELT_Jobs
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 */2 * * *'
 
 env:
   PUBLIC_KEY: ${{ secrets.public_key }}
@@ -67,8 +69,9 @@ jobs:
         run: openssl enc -d -aes-256-cbc -in elt_jobs/config.enc -out elt_jobs/.ini -pbkdf2 -k $PUBLIC_KEY
       - name: Start Data Quality Test
         run: python expectations/run_test.py
+
   Run_dbt_job:
-    needs: [Run_Mysql_Snowflake, Clean_Mysql]
+    needs: [Run_Mysql_Snowflake, Clean_Mysql, Data_Quality_Test]
     name: Working with snowflake WH and dbt tranforming from raw to silver model
     env:
       DB_HOST: ${{ secrets.DB_HOST }}

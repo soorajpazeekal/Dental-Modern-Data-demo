@@ -49,7 +49,7 @@ def read_cluster_and_write_sf(spark, cluster_id):
                 df.write.format("net.snowflake.spark.snowflake") \
                     .options(**sfOptions) \
                     .option("dbtable", item) \
-                    .mode("overwrite").save()
+                    .mode("append").save()
             except Exception as e:
                 log.error(e)
         log.info(f"Database {item} operations completed")
