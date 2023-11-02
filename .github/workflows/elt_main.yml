@@ -67,5 +67,25 @@ jobs:
         run: openssl enc -d -aes-256-cbc -in elt_jobs/config.enc -out elt_jobs/.ini -pbkdf2 -k $PUBLIC_KEY
       - name: Start Data Quality Test
         run: python expectations/run_test.py
+  Run_dbt_job:
+    needs: [Run_Mysql_Snowflake, Clean_Mysql]
+    name: Working with snowflake WH and dbt tranforming from raw to silver model
+    env:
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASS: ${{ secrets.DB_PASS }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install dbt-snowflake==1.6.4
+      - name: Run dbt
+        run: cd dbt_workflow/sf_workflow && dbt run --profiles-dir .
 
 
