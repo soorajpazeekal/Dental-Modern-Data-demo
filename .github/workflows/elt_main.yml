@@ -1,8 +1,6 @@
 name: Deploy_ELT_Jobs
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 */2 * * *'
 
 env:
   PUBLIC_KEY: ${{ secrets.public_key }}
