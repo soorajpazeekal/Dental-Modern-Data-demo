@@ -1,0 +1,28 @@
+[global]
+username = 
+password = 
+port = 3306
+
+[cluster_01]
+jdbc_url = jdbc:mysql://<ip>:3306/patient_crm
+tables = pi_informations,medical_history,dental_records,insurance_information
+
+[cluster_02]
+jdbc_url = jdbc:mysql://<ip>:3306/billing_and_payment
+tables = invoices,payment_records
+
+[cluster_03]
+jdbc_url = jdbc:mysql://<ip>:3306/staff_management
+tables = staff_information,salary_history,attendance_records
+
+[cluster_04]
+jdbc_url = jdbc:mysql://<ip>:3306/inventory_and_supplies
+tables = table_inventory_and_supplies
+
+[sfOptions]
+sfURL = 
+sfUser = 
+sfPassword = 
+sfDatabase = 
+sfSchema = 
+sfWarehouse = 
