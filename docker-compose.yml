@@ -4,18 +4,59 @@ x-docker:
   &project_name modern_dental_data_demo
 
 services:
-  app:
+
+  billing_and_payment:
     build:
-      context: .
+      context: ./Database_Services/billing_and_payment
+      dockerfile: Dockerfile
     links:
       - "mysql:localhost"
-    image: data_generator
-    container_name: data-generator-container
+    image: billing_and_payment
+    container_name: billing_and_payment-container
     depends_on:
       - mysql
     networks:
       - custom_network
 
+
+  inventory_and_supplies:
+    build:
+      context: ./Database_Services/inventory_and_supplies
+      dockerfile: Dockerfile
+    links:
+      - "mysql:localhost"
+    image: inventory_and_supplies
+    container_name: inventory_and_supplies-container
+    depends_on:
+      - mysql
+    networks:
+      - custom_network
+
+  patient_crm:
+    build:
+      context: ./Database_Services/patient_crm
+      dockerfile: Dockerfile
+    links:
+      - "mysql:localhost"
+    image: patient_crm
+    container_name: patient_crm-container
+    depends_on:
+      - mysql
+    networks:
+      - custom_network
+
+  staff_management:
+    build:
+      context: ./Database_Services/staff_management
+      dockerfile: Dockerfile
+    links:
+      - "mysql:localhost"
+    image: staff_management
+    container_name: staff_management-container
+    depends_on:
+      - mysql
+    networks:
+      - custom_network
 
 
   mysql:
