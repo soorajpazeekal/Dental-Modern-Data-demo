@@ -1,0 +1,47 @@
+version: '3'
+
+x-docker:
+  &project_name modern_dental_data_demo
+
+services:
+  app:
+    build:
+      context: .
+    links:
+      - "mysql:localhost"
+    image: data_generator
+    container_name: data-generator-container
+    depends_on:
+      - mysql
+    networks:
+      - custom_network
+
+
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    command: --init-file /data/application/init.sql
+    volumes:
+        - ./init.sql:/data/application/init.sql
+        - mysql-data:/var/lib/mysql
+    env_file:
+      - .env
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 3
+    networks:
+      - custom_network
+    ports:
+      - "3306:3306"
+
+  
+volumes:
+  mysql-data:
+
+networks:
+  custom_network:
+    driver: bridge
+    name: modern_data_network
