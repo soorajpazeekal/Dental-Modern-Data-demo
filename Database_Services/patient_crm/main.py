@@ -4,13 +4,22 @@ from dotenv import load_dotenv
 from generate import *
 
 load_dotenv()
-#log.basicConfig(level=log.INFO)
-conn = mysql.connector.connect(
-    host = 'localhost',
-    user = 'root',
-    password = os.getenv("MYSQL_ROOT_PASSWORD"),
-    database = os.getenv("MYSQL_DATABASE")
-)
+log.basicConfig(level=log.INFO)
+
+try:
+    conn = mysql.connector.connect(
+        host = 'localhost',
+        user = 'root',
+        password = os.getenv("MYSQL_ROOT_PASSWORD"),
+        database = os.getenv("MYSQL_DATABASE")
+    )
+except mysql.connector.Error as err:
+        conn = mysql.connector.connect(
+        host = 'mysql',
+        user = 'root',
+        password = os.getenv("MYSQL_ROOT_PASSWORD"),
+        database = os.getenv("MYSQL_DATABASE")
+    )
 
 def init_execute_sql(file_path = "sql/init.sql", connection = conn):
     with open(file_path, "r") as sql_file:
