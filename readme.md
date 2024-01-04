@@ -128,7 +128,7 @@ sfWarehouse = <Snowflake sWarehouse name>
 ```bash
 openssl enc -aes-256-cbc -salt -in .ini -out config.enc -pbkdf2 -k <public_key> #Any string
 ```
-**5. Run 'act' it will automatically start tis project**
+**5. Run 'act' it will automatically start this project**
 ***Note: run this command on root Folder of this project***
 ```bash
 ./bin/act -s public_key=<public_key>
