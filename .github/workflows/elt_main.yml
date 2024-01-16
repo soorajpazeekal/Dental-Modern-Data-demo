@@ -88,5 +88,3 @@ jobs:
         run: pip install dbt-snowflake==1.6.4
       - name: Run dbt
         run: cd dbt_workflow/sf_workflow && dbt run --profiles-dir .
-
-

@@ -3,6 +3,7 @@
 */
 {{ config(materialized='table') }}
 
+
 with __track_payment_and_invoice as (
     SELECT 
         pr.PAYMENT_AMOUNT,
