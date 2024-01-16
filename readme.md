@@ -11,7 +11,7 @@ This repository contains a data engineering proof-of-concept project designed fo
 Moving away from their current manual data tools, which are known for their time-consuming and complex processes, offers significant advantages. A more automated and intuitive solution would not only streamline their workflow but also empower them to analyze and utilize their data with greater speed and accuracy. This shift would enhance their overall productivity, unlock valuable insights, and ultimately drive better decision-making.
 
   
-  
+
 
 ## Project Objectives
 
