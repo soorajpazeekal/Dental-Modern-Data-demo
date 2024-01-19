@@ -81,6 +81,8 @@ Moving away from their current manual data tools, which are known for their time
 
 ## Installation 
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/soorajpazeekal/Dental-Modern-Data-demo)
+
 To run this project:  
 
 **1 .First Clone this repo and select project directory**
@@ -90,52 +92,8 @@ git clone  https://github.com/soorajpazeekal/Dental-Modern-Data-demo.git
 cd Dental-Modern-Data-demo
 ```
 
-**Note:** This project can be installed in different ways.
 
-- Cloud environment
-- Standalone locally (Follow the instructions below)
-
-```bash
-docker compose  up  -d
-<after starting>
-docker ps
-```
-
-It will spin up Docker with MySQL containers and other required dependencies for the project.
-After starting, please verify container health with 'docker ps'.
-
-
-**Note:** This proof-of-concept has two different parts:
-
-Database services
-
-- This part mainly works with database services. also generate data for the live simulation of this project.
-
-- After generating data, this service automatically writes it to the database.
-
-- It used Python, the [Faker Library](https://faker.readthedocs.io/en/master/), and some other random algorithms to generate mock data for this simulation.
-
-Main Data Services
-
-- It will manage and monitor data pipelines using GitHub actions.
-
-- Write to the Snowflake staging zone and perform data quality and validations.
-
-- using data-building tool to move data between different layers ([medallion architecture](https://www.databricks.com/glossary/medallion-architecture))
-
-
-**2. Install act (To run Github actions locally, this project uses [act](https://github.com/nektos/act) ~ Run your GitHub Actions locally 🚀 ~)**
-
-
-```bash
-curl -s  https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
-```
-
-***If you run this command in the project directory, Act will create a directory called 'bin' and install an executable file called ~act! [Please click this link for more info](https://github.com/nektos/act#example-commands)***
-
-  
-
-**3. Prepare .env and .ini files.**
+**2. Prepare .env and .ini files.**
 
 - Open '.env.example' file and rename to .env with:
 
@@ -185,7 +143,7 @@ sfWarehouse = <Snowflake sWarehouse name>
 
 ```
 
-**4. Encrypt the configuration file (added security for using github actions and repos publicly).**
+**3. Encrypt the configuration file (added security for using github actions and repos publicly).**
 
 *Note: This is an optional one! but highly recommend it if you are running locally. (Run this command with in 'elt_jobs' Folder)*
 
@@ -196,6 +154,50 @@ sfWarehouse = <Snowflake sWarehouse name>
 openssl enc  -aes-256-cbc  -salt  -in  .ini  -out  config.enc  -pbkdf2  -k <public_key> #Any string
 
 ```
+
+**Note:** This project can be installed in different ways.
+
+- Cloud environment (Using AWS)
+- Standalone locally (Follow the instructions below)
+
+```bash
+docker compose  up  -d
+docker ps
+```
+
+It will spin up Docker with MySQL containers and other required dependencies for the project.
+After starting, please verify container health with 'docker ps'.
+
+
+**Note:** This proof-of-concept has two different parts:
+
+Database services
+
+- This part mainly works with database services. also generate data for the live simulation of this project.
+
+- After generating data, this service automatically writes it to the database.
+
+- It used Python, the [Faker Library](https://faker.readthedocs.io/en/master/), and some other random algorithms to generate mock data for this simulation.
+
+Main Data Services
+
+- It will manage and monitor data pipelines using GitHub actions.
+
+- Write to the Snowflake staging zone and perform data quality and validations.
+
+- using data-building tool to move data between different layers ([medallion architecture](https://www.databricks.com/glossary/medallion-architecture))
+
+
+**4. Install act (To run Github actions locally, this project uses [act](https://github.com/nektos/act) ~ Run your GitHub Actions locally 🚀 ~)**
+
+
+```bash
+curl -s  https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+```
+
+***If you run this command in the project directory, Act will create a directory called 'bin' and install an executable file called ~act! [Please click this link for more info](https://github.com/nektos/act#example-commands)***
+
+
 
 **5. Run 'act' it will automatically start this project**
 
