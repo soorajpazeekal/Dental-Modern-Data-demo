@@ -155,15 +155,17 @@ openssl enc  -aes-256-cbc  -salt  -in  .ini  -out  config.enc  -pbkdf2  -k <publ
 
 ```
 
-**Note:** This project can be installed in different ways.
+**Note:** This project can be installed in different ways:
 
 - Cloud environment (Using AWS)
 - Standalone locally (Follow the instructions below)
+
 
 ```bash
 docker compose  up  -d
 docker ps
 ```
+
 
 It will spin up Docker with MySQL containers and other required dependencies for the project.
 After starting, please verify container health with 'docker ps'.
@@ -194,6 +196,7 @@ Main Data Services
 ```bash
 curl -s  https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
 ```
+
 
 ***If you run this command in the project directory, Act will create a directory called 'bin' and install an executable file called ~act! [Please click this link for more info](https://github.com/nektos/act#example-commands)***
 
