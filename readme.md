@@ -57,7 +57,7 @@ Moving away from their current manual data tools, which are known for their time
 ![Architecture Screenshot](https://raw.githubusercontent.com/soorajpazeekal/Dental-Modern-Data-demo/main/doc/new-data-modern.png)
 
 
-### Database Design
+### Data Warehouse Schema Design
 
 ![dental-poc](https://github.com/soorajpazeekal/Dental-Modern-Data-demo/assets/41431605/020069e0-4739-4d75-988e-b108a5999f17)
 
