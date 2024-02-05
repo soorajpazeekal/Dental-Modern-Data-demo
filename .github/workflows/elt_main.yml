@@ -2,8 +2,10 @@ name: Deploy_ELT_Jobs
 on:
   workflow_dispatch:
 
+
 env:
   PUBLIC_KEY: ${{ secrets.public_key }}
+
   
 jobs:
   Run_Mysql_Snowflake:
@@ -26,7 +28,6 @@ jobs:
         run: cd elt_jobs &&  ls -a
       - name: Main elt job
         run: cd elt_jobs && python main_elt.py
-
 
   Clean_Mysql:
     needs: Run_Mysql_Snowflake
@@ -67,6 +68,7 @@ jobs:
         run: openssl enc -d -aes-256-cbc -in elt_jobs/config.enc -out elt_jobs/.ini -pbkdf2 -k $PUBLIC_KEY
       - name: Start Data Quality Test
         run: python expectations/run_test.py
+
 
   Run_dbt_job:
     needs: [Run_Mysql_Snowflake, Clean_Mysql, Data_Quality_Test]
