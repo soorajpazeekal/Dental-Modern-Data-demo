@@ -12,10 +12,8 @@ CMD ["nohup", "python", "bg_worker.py", ">", "script.log", "2>&1", "&"]
 WORKDIR /Dental-Modern-Data-demo/Database_Services/inventory_and_supplies
 CMD ["nohup", "python", "bg_worker.py", ">", "script.log", "2>&1", "&"]
 
-
 WORKDIR /Dental-Modern-Data-demo/Database_Services/patient_crm
 CMD ["nohup", "python", "bg_worker.py", ">", "script.log", "2>&1", "&"]
-
 
 WORKDIR /Dental-Modern-Data-demo/Database_Services/staff_management
 CMD ["nohup", "python", "bg_worker.py", ">", "script.log", "2>&1", "&"]
